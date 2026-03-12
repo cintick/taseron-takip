@@ -1,4 +1,4 @@
-const SHEET_ID = "1DerOnCwzvDWcwwkVmPf2uYGFTY972eXDCnK4wIYACH";
+const SHEET_ID = "1DerOnCwzvDWcwwkVmPf2uYGFTY972eXDCnK4wIYACH0";
 const SHEET_NAME = "GEÇİCİ KABUL ÖZETİ";
 const API_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
 
