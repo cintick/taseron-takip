@@ -1,3 +1,4 @@
+const SIFRE = "123456"; //şifre buradan değiştirilebilir
 const SHEET_ID = "1DerOnCwzvDWcwwkVmPf2uYGFTY972eXDCnK4wIYACH0";
 const SHEET_NAME = "GEÇİCİ KABUL ÖZETİ";
 const API_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
@@ -78,7 +79,10 @@ function App() {
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState(null);
   const [filter, setFilter] = useState("TÜMÜ");
-
+  const [girisYapildi, setGirisYapildi] = useState(false);
+  const [girilen, setGirilen] = useState("");
+  const [hata, setHata] = useState(false);
+  
   useEffect(() => {
     fetch(API_URL)
       .then(r => r.text())
@@ -113,7 +117,41 @@ function App() {
   }), [data]);
 
   const detail = selected !== null ? data[selected] : null;
-
+  
+  if (!girisYapildi) {
+    return React.createElement("div", {
+      style: { display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", height:"100vh", background:"#0f172a" }
+    },
+      React.createElement("div", { style:{ fontSize:11, letterSpacing:3, color:"#475569", marginBottom:8, textTransform:"uppercase" } }, "Mahall Bomonti İzmir · Türkerler Holding"),
+      React.createElement("div", { style:{ fontSize:20, fontWeight:700, color:"#fff", marginBottom:32 } }, "Taşeron Takip Paneli"),
+      React.createElement("input", {
+        type: "password",
+        maxLength: 6,
+        placeholder: "Şifre",
+        value: girilen,
+        onChange: e => { setGirilen(e.target.value); setHata(false); },
+        onKeyDown: e => {
+          if (e.key === "Enter") {
+            if (girilen === SIFRE) setGirisYapildi(true);
+            else { setHata(true); setGirilen(""); }
+          }
+        },
+        style: {
+          padding:"12px 20px", fontSize:20, letterSpacing:8, textAlign:"center",
+          borderRadius:8, border: hata ? "2px solid #ef4444" : "2px solid #334155",
+          background:"#1e293b", color:"#fff", outline:"none", width:180, marginBottom:12
+        }
+      }),
+      React.createElement("button", {
+        onClick: () => {
+          if (girilen === SIFRE) setGirisYapildi(true);
+          else { setHata(true); setGirilen(""); }
+        },
+        style: { padding:"10px 28px", background:"#3b82f6", color:"#fff", border:"none", borderRadius:6, fontSize:14, cursor:"pointer", fontWeight:600 }
+      }, "Giriş"),
+      hata && React.createElement("div", { style:{ color:"#ef4444", fontSize:12, marginTop:8 } }, "Yanlış şifre")
+    );
+  }
   if (loading) return React.createElement("div", {
     style: { display:"flex", alignItems:"center", justifyContent:"center", height:"100vh", fontSize:14, color:"#64748b" }
   }, "Veriler yükleniyor...");
