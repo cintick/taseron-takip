@@ -88,7 +88,7 @@ function App() {
         const rows = parseSheetData(raw);
         if (rows.length === 0) { setError("Veri okunamadı."); setLoading(false); return; }
         const cols = Object.keys(rows[0]);
-        setData(rows.map(r => mapRow(r, cols)));
+        setData(rows.map(r => mapRow(r, cols)).reverse());
         setLoading(false);
       })
       .catch(() => { setError("Bağlantı hatası."); setLoading(false); });
