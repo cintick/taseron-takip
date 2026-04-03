@@ -58,16 +58,16 @@ function mapRow(row, cols) {
     kesin_kabule_uygunluk: String(row[cols[6]] || "").trim(),
     kesin_kabul_onay: String(row[cols[7]] || "").trim(),
     kesin_kabul_durumu: String(row[cols[8]] || "").trim().toUpperCase(),
-    kesin_hesap_onay: String(row[cols[10]] || "").trim(),
-    kesin_hesap_durumu: String(row[cols[11]] || "").trim().toUpperCase(),
-    nakit_teminat: String(row[cols[12]] || "").trim(),
-    nakit_iade: String(row[cols[13]] || "").trim(),
-    kesin_teminat: String(row[cols[14]] || "").trim(),
-    kesin_iade: String(row[cols[15]] || "").trim(),
-    aciklama: String(row[cols[16]] || "").trim(),
+    hakedis_no: String(row[cols[10]] || "").trim(),           // K → YENİ: Hakediş No
+    son_hakedis_tarihi: String(row[cols[11]] || "").trim(),   // L → YENİ: Son Onaylı Hakediş Tarihi
+    kesin_hesap_durumu: String(row[cols[12]] || "").trim().toUpperCase(), // M → YENİ: Kesin Hesap Durumu
+    nakit_teminat: String(row[cols[13]] || "").trim(),        // N
+    nakit_iade: String(row[cols[14]] || "").trim(),           // O
+    kesin_teminat: String(row[cols[15]] || "").trim(),        // P
+    kesin_iade: String(row[cols[16]] || "").trim(),           // Q
+    aciklama: String(row[cols[17]] || "").trim(),             // R → YENİ: Teminat İade Açıklaması
   };
 }
-
 function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -261,7 +261,7 @@ function App() {
                 color:detail.gecici_kabul_durumu==="VAR"?"#065f46":"#92400e",
                 bg:detail.gecici_kabul_durumu==="VAR"?"#ecfdf5":"#fffbeb",
                 border:detail.gecici_kabul_durumu==="VAR"?"#6ee7b7":"#fcd34d" },
-              { title:"Kesin Hesap", status:detail.kesin_hesap_durumu||"—", date:detail.kesin_hesap_onay,
+              { title:"Kesin Hesap", status:detail.kesin_hesap_durumu||"—", date:detail.son_hakedis_tarihi, ...}
                 color:detail.kesin_hesap_durumu==="ONAYLI"?"#1e40af":"#64748b",
                 bg:detail.kesin_hesap_durumu==="ONAYLI"?"#eff6ff":"#f8fafc",
                 border:detail.kesin_hesap_durumu==="ONAYLI"?"#93c5fd":"#e2e8f0" },
