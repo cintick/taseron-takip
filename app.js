@@ -261,7 +261,7 @@ function App() {
                 color:detail.gecici_kabul_durumu==="VAR"?"#065f46":"#92400e",
                 bg:detail.gecici_kabul_durumu==="VAR"?"#ecfdf5":"#fffbeb",
                 border:detail.gecici_kabul_durumu==="VAR"?"#6ee7b7":"#fcd34d" },
-              { title:"Kesin Hesap", status:detail.kesin_hesap_durumu||"—", date:detail.son_hakedis_tarihi, ...}
+              { title:"Kesin Hesap", status:detail.kesin_hesap_durumu||"—", date:detail.son_hakedis_tarihi,
                 color:detail.kesin_hesap_durumu==="ONAYLI"?"#1e40af":"#64748b",
                 bg:detail.kesin_hesap_durumu==="ONAYLI"?"#eff6ff":"#f8fafc",
                 border:detail.kesin_hesap_durumu==="ONAYLI"?"#93c5fd":"#e2e8f0" },
